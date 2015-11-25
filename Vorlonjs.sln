@@ -60,6 +60,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		whatsnew.md = whatsnew.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{5D8D8CF0-0FCE-48FD-95AB-0B5610D7C8F3}"
+	ProjectSection(SolutionItems) = preProject
+		Deployment\azuredeploy.json = Deployment\azuredeploy.json
+		Deployment\dev-azuredeploy-parameters.json = Deployment\dev-azuredeploy-parameters.json
+		Deployment\postazuredeploy.json = Deployment\postazuredeploy.json
+		Deployment\preprod-azuredeploy-parameter.json = Deployment\preprod-azuredeploy-parameter.json
+		Deployment\prod-azuredeploy-parameters.json = Deployment\prod-azuredeploy-parameters.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +81,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5D8D8CF0-0FCE-48FD-95AB-0B5610D7C8F3} = {EC73B3FB-92E2-44B9-9763-AE8ADA5CC470}
 	EndGlobalSection
 EndGlobal
