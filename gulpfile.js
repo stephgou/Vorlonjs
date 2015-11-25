@@ -11,9 +11,9 @@ var gulp = require('gulp'),
     zip = require('gulp-zip'),
     mocha = require('gulp-mocha');
 
-/// ********
+//// ********
 
-/// GLOBAL 
+//// GLOBAL 
 
 gulp.task('default', function () {
     return gulp.start('default-server-all');
