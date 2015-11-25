@@ -1,5 +1,6 @@
 # Vorlon.JS
-# 2 Sites Deploy
+# 2 web sites deployment
+
 A new, open source, extensible, platform-agnostic tool for remotely debugging and testing your JavaScript. Powered by node.js and socket.io.
 
 Understand all about Vorlon.js in 20 minutes watching this video : https://channel9.msdn.com/Shows/codechat/046
