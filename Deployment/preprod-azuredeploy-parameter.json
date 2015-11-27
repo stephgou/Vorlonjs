@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "siteName": {
-            "value": "VorlonJS-RM-Preprod"
+            "value": "stephgou-VorlonJS-RM-Preprod"
         },
         "hostingPlanName": {
             "value": "VorlonJS-RM-Preprod-HP"
