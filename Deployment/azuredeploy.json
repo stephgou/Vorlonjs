@@ -64,77 +64,77 @@
                 "serverFarm": "[parameters('hostingPlanName')]"
             }
         },
-        {
-            "apiVersion": "2014-04-01",
-            "name": "[concat(parameters('hostingPlanName'), '-', resourceGroup().name)]",
-            "type": "Microsoft.Insights/autoscalesettings",
-            "location": "East US",
-            "tags": {
-                "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]": "Resource",
-                "displayName": "AutoScaleSettings"
-            },
-            "dependsOn": [
-                "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
-            ],
-            "properties": {
-                "profiles": [
-                    {
-                        "name": "Default",
-                        "capacity": {
-                            "minimum": 1,
-                            "maximum": 2,
-                            "default": 1
-                        },
-                        "rules": [
-                            {
-                                "metricTrigger": {
-                                    "metricName": "CpuPercentage",
-                                    "metricResourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
-                                    "timeGrain": "PT1M",
-                                    "statistic": "Average",
-                                    "timeWindow": "PT10M",
-                                    "timeAggregation": "Average",
-                                    "operator": "GreaterThan",
-                                    "threshold": 80.0
-                                },
-                                "scaleAction": {
-                                    "direction": "Increase",
-                                    "type": "ChangeCount",
-                                    "value": 1,
-                                    "cooldown": "PT10M"
-                                }
-                            },
-                            {
-                                "metricTrigger": {
-                                    "metricName": "CpuPercentage",
-                                    "metricResourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
-                                    "timeGrain": "PT1M",
-                                    "statistic": "Average",
-                                    "timeWindow": "PT1H",
-                                    "timeAggregation": "Average",
-                                    "operator": "LessThan",
-                                    "threshold": 60.0
-                                },
-                                "scaleAction": {
-                                    "direction": "Decrease",
-                                    "type": "ChangeCount",
-                                    "value": 1,
-                                    "cooldown": "PT1H"
-                                }
-                            }
-                        ]
-                    }
-                ],
-                "enabled": false,
-                "name": "[concat(parameters('hostingPlanName'), '-', resourceGroup().name)]",
-                "targetResourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
-            }
+      {
+        "apiVersion": "2014-04-01",
+        "name": "[concat(parameters('hostingPlanName'), '-', resourceGroup().name)]",
+        "type": "Microsoft.Insights/autoscalesettings",
+        "location": "[resourceGroup().location]",
+        "tags": {
+          "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]": "Resource",
+          "displayName": "AutoScaleSettings"
         },
+        "dependsOn": [
+          "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
+        ],
+        "properties": {
+          "profiles": [
+            {
+              "name": "Default",
+              "capacity": {
+                "minimum": 1,
+                "maximum": 2,
+                "default": 1
+              },
+              "rules": [
+                {
+                  "metricTrigger": {
+                    "metricName": "CpuPercentage",
+                    "metricResourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+                    "timeGrain": "PT1M",
+                    "statistic": "Average",
+                    "timeWindow": "PT10M",
+                    "timeAggregation": "Average",
+                    "operator": "GreaterThan",
+                    "threshold": 80.0
+                  },
+                  "scaleAction": {
+                    "direction": "Increase",
+                    "type": "ChangeCount",
+                    "value": 1,
+                    "cooldown": "PT10M"
+                  }
+                },
+                {
+                  "metricTrigger": {
+                    "metricName": "CpuPercentage",
+                    "metricResourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+                    "timeGrain": "PT1M",
+                    "statistic": "Average",
+                    "timeWindow": "PT1H",
+                    "timeAggregation": "Average",
+                    "operator": "LessThan",
+                    "threshold": 60.0
+                  },
+                  "scaleAction": {
+                    "direction": "Decrease",
+                    "type": "ChangeCount",
+                    "value": 1,
+                    "cooldown": "PT1H"
+                  }
+                }
+              ]
+            }
+          ],
+          "enabled": false,
+          "name": "[concat(parameters('hostingPlanName'), '-', resourceGroup().name)]",
+          "targetResourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
+        }
+      },
         {
             "apiVersion": "2014-04-01",
             "name": "[concat('ServerErrors ', parameters('siteName'))]",
             "type": "Microsoft.Insights/alertrules",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[concat('Microsoft.Web/sites/', parameters('siteName'))]"
             ],
@@ -168,7 +168,7 @@
             "apiVersion": "2014-04-01",
             "name": "[concat('ForbiddenRequests ', parameters('siteName'))]",
             "type": "Microsoft.Insights/alertrules",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[concat('Microsoft.Web/sites/', parameters('siteName'))]"
             ],
@@ -202,7 +202,7 @@
             "apiVersion": "2014-04-01",
             "name": "[concat('CPUHigh ', parameters('hostingPlanName'))]",
             "type": "Microsoft.Insights/alertrules",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
             ],
@@ -236,7 +236,7 @@
             "apiVersion": "2014-04-01",
             "name": "[concat('LongHttpQueue ', parameters('hostingPlanName'))]",
             "type": "Microsoft.Insights/alertrules",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
             ],
@@ -266,21 +266,21 @@
                 }
             }
         },
-        {
-            "apiVersion": "2014-04-01",
-            "name": "[parameters('siteName')]",
-            "type": "Microsoft.Insights/components",
-            "location": "Central US",
-            "dependsOn": [
-                "[concat('Microsoft.Web/sites/', parameters('siteName'))]"
-            ],
-            "tags": {
-                "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('siteName'))]": "Resource",
-                "displayName": "AppInsightsComponent"
-            },
-            "properties": {
-                "applicationId": "[parameters('siteName')]"
-            }
+      {
+        "apiVersion": "2014-04-01",
+        "name": "[parameters('siteName')]",
+        "type": "Microsoft.Insights/components",
+        "location": "[resourceGroup().location]",
+        "dependsOn": [
+          "[concat('Microsoft.Web/sites/', parameters('siteName'))]"
+        ],
+        "tags": {
+          "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('siteName'))]": "Resource",
+          "displayName": "AppInsightsComponent"
+        },
+        "properties": {
+          "applicationId": "[parameters('siteName')]"
         }
+      }
     ]
 }
